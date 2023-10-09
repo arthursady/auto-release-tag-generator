@@ -32,7 +32,7 @@ runs:
 
     - name: Set tag name
       id: tagname
-      run: echo "TAG_NAME= ${{ inputs.prefix }}v${{ env.GITVERSION_MAJORMINORPATCH }}-${{env.GITVERSION_COMMITSSINCEVERSIONSOURCE}}-${{ inputs.buildNumber }}" >> $GITHUB_ENV
+      run: echo "TAG_NAME=${{ inputs.prefix }}v${{ env.GITVERSION_MAJORMINORPATCH }}-${{env.GITVERSION_COMMITSSINCEVERSIONSOURCE}}-${{ inputs.buildNumber }}" >> $GITHUB_ENV
       shell: bash
 
     - name: Create tag
