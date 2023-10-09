@@ -9,9 +9,7 @@ inputs:
     required: true
 
 runs:
-  shell: bash
   using: "composite"
-
   steps:
     - name: Install GitVersion
       uses: gittools/actions/gitversion/setup@v0
@@ -24,6 +22,7 @@ runs:
         echo "COMMITTER_NAME=$name" >> $GITHUB_ENV
         email=$(git log -1 --pretty=format:%ae)
         echo "COMMITTER_EMAIL=$email" >> $GITHUB_ENV
+      shell: bash
 
     - name: Determine Version
       uses: gittools/actions/gitversion/execute@v0
@@ -31,6 +30,7 @@ runs:
     - name: Set tag name
       id: tagname
       run: echo "TAG_NAME= ${{ github.event.inputs.prefix }}v${{ env.GITVERSION_MAJORMINORPATCH }}-${{env.GITVERSION_COMMITSSINCEVERSIONSOURCE}}-${{ github.event.inputs.buildNumber }}" >> $GITHUB_ENV
+      shell: bash
 
     - name: Create tag
       run: |
@@ -39,6 +39,7 @@ runs:
         git config user.name "Github actions"
         git tag -a "${{ env.TAG_NAME }}" -m "${{ env.GITVERSION_INFORMATIONALVERSION }}"
         git push origin "${{ env.TAG_NAME }}"
+      shell: bash
 
     - name: Create Release
       id: create_release
