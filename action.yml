@@ -32,7 +32,7 @@ runs:
 
     - name: Set tag name
       id: tagname
-      run: echo "TAG_NAME= ${{ github.event.inputs.prefix }}v${{ env.GITVERSION_MAJORMINORPATCH }}-${{env.GITVERSION_COMMITSSINCEVERSIONSOURCE}}-${{ github.event.inputs.buildNumber }}" >> $GITHUB_ENV
+      run: echo "TAG_NAME= ${{ inputs.prefix }}v${{ env.GITVERSION_MAJORMINORPATCH }}-${{env.GITVERSION_COMMITSSINCEVERSIONSOURCE}}-${{ inputs.buildNumber }}" >> $GITHUB_ENV
       shell: bash
 
     - name: Create tag
@@ -48,7 +48,7 @@ runs:
       id: create_release
       uses: actions/create-release@latest
       env:
-        GITHUB_TOKEN: ${{ github.event.inputs.githubToken }}
+        GITHUB_TOKEN: ${{ inputs.githubToken }}
       with:
         tag_name: ${{ env.TAG_NAME }}
         release_name: ${{ env.TAG_NAME }}
