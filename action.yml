@@ -1,4 +1,5 @@
 name: "Release Tag Generator"
+shell: bash
 
 inputs:
   prefix:
