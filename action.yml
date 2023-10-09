@@ -1,15 +1,15 @@
 name: "Release Tag Generator"
-shell: bash
 
 inputs:
   prefix:
-    description: 'prefix to add before the version'
+    description: "prefix to add before the version"
     required: true
   buildNumber:
-    description: 'The build number on the workflow that ran this action'
+    description: "The build number on the workflow that ran this action"
     required: true
 
 runs:
+  shell: bash
   using: "composite"
 
   steps:
