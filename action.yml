@@ -7,6 +7,9 @@ inputs:
   buildNumber:
     description: "The build number on the workflow that ran this action"
     required: true
+  githubToken:
+    description: "The git token to be used"
+    required: true  
 
 runs:
   using: "composite"
@@ -45,7 +48,7 @@ runs:
       id: create_release
       uses: actions/create-release@latest
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ github.event.inputs.githubToken }}
       with:
         tag_name: ${{ env.TAG_NAME }}
         release_name: ${{ env.TAG_NAME }}
